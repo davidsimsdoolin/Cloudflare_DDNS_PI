@@ -12,7 +12,7 @@ RecordID = "TBD"
 
 #Setup for logging
 logs = ""
-logging.basicConfig(filename='cloudflare.log',filemode = 'a', format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',datefmt='%H:%M:%S', level=logging.DEBUG)
+logging.basicConfig(filename='ddns.log',filemode = 'a', format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',datefmt='%H:%M:%S', level=logging.DEBUG)
 
 #Retrieval of current physicla IP and comparison to previous
 #Prevents lots of unneeded api calls.

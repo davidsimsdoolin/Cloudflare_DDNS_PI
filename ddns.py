@@ -33,9 +33,12 @@ else:
 
 		res = conn.getresponse()
 		data = res.read()
-		logs = logs + "|IP has changed and DNS set"
-		write = open("ip.txt", "w")
-		write.write(ExternalIP)	
+		if str(data).__contains__("\"success\":false"):
+			logs = logs + "| API call returned error| " + str(data)
+		else:
+			logs = logs + "|IP has changed and DNS set"
+			write = open("ip.txt", "w")
+			write.write(ExternalIP)	
 	except:
 		logs = logs + "|Error with api call."
 

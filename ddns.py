@@ -35,11 +35,11 @@ else:
 		if str(data).__contains__("\"success\":false"):
 			logs = logs + "| API call returned error| " + str(data)
 		else:
-			logs = logs + "|IP has changed and DNS set"
+			logs = logs + "| IP has changed and DNS set"
 			write = open("ip.txt", "w")
 			write.write(externalIP)	
 	except:
-		logs = logs + "|Error with api call."
+		logs = logs + "| Error with api call."
 
 #Writing to log
 logging.info(logs)

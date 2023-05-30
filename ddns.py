@@ -30,7 +30,6 @@ else:
 		payload = "{\n  \"content\": \"" + externalIP + "\",\n  \"name\": \"" + record + "\",\n  \"proxied\": true,\n  \"type\": \"A\"}"
 		headers = {'Content-Type': "application/json",'X-Auth-Email': authEmail,'X-Auth-Key': authKey}
 		conn.request("PUT", "/client/v4/zones/" + zoneID + "/dns_records/" + recordID, payload, headers)
-
 		res = conn.getresponse()
 		data = res.read()
 		if str(data).__contains__("\"success\":false"):
@@ -38,7 +37,7 @@ else:
 		else:
 			logs = logs + "|IP has changed and DNS set"
 			write = open("ip.txt", "w")
-			write.write(ExternalIP)	
+			write.write(externalIP)	
 	except:
 		logs = logs + "|Error with api call."
 

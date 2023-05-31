@@ -16,12 +16,12 @@ recordID = apiDict['recordID']
 
 #Setup for logging
 logs = ""
-logging.basicConfig(filename='ddns.log',filemode = 'a', format='%(asctime)s, %(levelname)s %(message)s',datefmt='%H:%M:%S', level=logging.DEBUG)
+logging.basicConfig(filename='ddns.log',filemode = 'a+', format='%(asctime)s, %(levelname)s %(message)s',datefmt='%H:%M:%S', level=logging.DEBUG)
 
 #Retrieval of current physical IP and comparison to previous
 #Prevents lots of unneeded api calls.
 externalIP = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-ipFile = open("ip.txt", "r")
+ipFile = open("ip.txt", "a+")
 oldIP = ipFile.read()
 logs = "Current IP is " + externalIP
 
@@ -40,8 +40,7 @@ else:
 			logs = logs + "| API call returned error| " + str(data)
 		else:
 			logs = logs + "| IP has changed and DNS set"
-			write = open("ip.txt", "w")
-			write.write(externalIP)	
+			ipFile.write(externalIP)	
 	except:
 		logs = logs + "| Error with api call."
 

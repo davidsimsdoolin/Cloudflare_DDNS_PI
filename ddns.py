@@ -3,16 +3,20 @@ import urllib.request
 import logging
 import json
 
+#Reading in json of api request variables in Dict
+apiFile = open('apiData.json')
+apiDict = json.load(apiFile)
+
 #Following will need custom information
-authEmail = "TBD"
-authKey = "TBD"
-zoneID = "TBD"
-record = "TBD"
-recordID = "TBD"
+authEmail = apiDict['authEmail']
+authKey = apiDict['authKey']
+zoneID = apiDict['zoneID']
+record = apiDict['record']
+recordID = apiDict['recordID']
 
 #Setup for logging
 logs = ""
-logging.basicConfig(filename='ddns.log',filemode = 'a', format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',datefmt='%H:%M:%S', level=logging.DEBUG)
+logging.basicConfig(filename='ddns.log',filemode = 'a', format='%(asctime)s, %(levelname)s %(message)s',datefmt='%H:%M:%S', level=logging.DEBUG)
 
 #Retrieval of current physical IP and comparison to previous
 #Prevents lots of unneeded api calls.

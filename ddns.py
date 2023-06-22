@@ -21,9 +21,9 @@ logging.basicConfig(filename='ddns.log',filemode = 'a+', format='%(asctime)s, %(
 #Retrieval of current physical IP and comparison to previous
 #Prevents lots of unneeded api calls.
 externalIP = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-ipFile = open("ip.txt", "a+")
+ipFile = open("ip.txt", "r+")
 oldIP = ipFile.read()
-logs = "Current IP is " + externalIP
+logs = "Current IP is " + externalIP + " | Logged IP is ! + oldIP
 
 #Api Call
 if externalIP == oldIP:
@@ -40,9 +40,11 @@ else:
 			logs = logs + "| API call returned error| " + str(data)
 		else:
 			logs = logs + "| IP has changed and DNS set"
+			ipFile.truncate(0)
 			ipFile.write(externalIP)	
 	except:
 		logs = logs + "| Error with api call."
 
+ipFile.close()
 #Writing to log
 logging.info(logs)
